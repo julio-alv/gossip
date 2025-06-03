@@ -173,12 +173,11 @@ func main() {
 
 	// Goroutine to periodically broadcast a message
 	go func() {
-		ticker := time.NewTicker(5 * time.Second)
+		ticker := time.NewTicker(1 * time.Second)
 		defer ticker.Stop()
 		for {
 			<-ticker.C
 			members := list.Members()
-			fmt.Println("n members:", len(members))
 			targetNode := members[rand.Int()%len(members)]
 			if targetNode.Name == *nodeName {
 				continue // Skip self, try again later
